@@ -1,10 +1,7 @@
-from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 from capsulers.models import User
 
-class UserCreateSerializer(serializers.ModelSerializer):
-    models = User
-    fields = ['email', 'password', 'password(again)']
-
-class UserLoginSerializer(serializers.ModelSerializer):
-    models = User
-    fields = ['email', 'password']
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        model = User
+        fields = ['email', 'password']

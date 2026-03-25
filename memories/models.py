@@ -32,5 +32,5 @@ class Capsule(models.Model):
 
 
 class WaitList(models.Model):
-    inviter = models.ForeignKey('memories.Capsule', related_name='invites')
-    recipient = models.ForeignKey('capsulers.User', related_name='on_waitlist')
+    inviter = models.ForeignKey('memories.Capsule', on_delete=models.CASCADE, related_name='invites')
+    recipient = models.ForeignKey('capsulers.User', on_delete=models.CASCADE, related_name='on_waitlist')

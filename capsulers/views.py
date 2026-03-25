@@ -52,15 +52,3 @@ def index(request, user):
     return HttpResponse(template.render())
 
 # Create your views here.
-
-
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class=UserCreateSerializer
-
-    @extend_schema(
-            request=UserCreateSerializer,
-            response={201: UserLoginSerializer}
-    )
-    def SignupView(self):
-        ...
