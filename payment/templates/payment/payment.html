@@ -1,0 +1,12 @@
+<!-- interswitch integration-->
+
+<form method="post" action="https://newwebpay.qa.interswitchng.com/collections/w/pay">
+    <input name="merchant_code" value="{{ merchant_code }}" />
+    <input name="pay_item_id" value="{{ pay_item_id }}" />
+    <input name="tax_ref" value="{{ tax_ref }}" />
+    <input name="amount" value="{{ amount }}" />
+    <input name="currency" value="{{ currency }}" />
+    <input name="site_redirect_url" value="{{ site_redirect_url }}" />
+
+    <button type="submit">Pay Now</button>
+</form>
