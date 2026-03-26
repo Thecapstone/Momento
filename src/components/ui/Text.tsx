@@ -7,7 +7,7 @@ type TextProps = {
   children?: ReactNode;
   variant?: "hero" | "heroSub" | "title" | "body" | "small" | "label";
   color?: "primary" | "muted" | "accent" | "white" | "green";
-  as?: "h1" | "h2" | "p" | "span" | "div";
+  as?: "h1" | "h2" | "h3" | "p" | "span" | "div";
   animate?: boolean;
   className?: string;
 };
@@ -21,7 +21,7 @@ export const Text = ({
   className = "",
 }: TextProps) => {
   const variants = {
-    hero: "font-serif font-medium text-5xl md:text-7xl tracking-tight",
+    hero: "font-serif font-medium text-3xl md:text-5xl tracking-tight",
 
     title: "font-serif font-medium text-3xl md:text-4xl",
 
