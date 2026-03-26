@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { CarouseAnimationStyles } from "@/app/lib/onboardingUtils";
+import { CarouseAnimationStyles } from "@/lib/onboardingUtils";
 
 const { animate, initial, transition } = CarouseAnimationStyles;
 const CarouselOne = () => (
