@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 type TextProps = {
   children?: ReactNode;
   variant?: "hero" | "heroSub" | "title" | "body" | "small";
-  color?: "primary" | "muted" | "accent" | "white";
+  color?: "primary" | "muted" | "accent" | "white" | "green";
   as?: "p" | "span" | "div";
   animate?: boolean;
   className?: string;
@@ -23,7 +23,7 @@ export const Text = ({
   const variants = {
     hero: "font-extrabold text-3xl md:text-6xl",
 
-    heroSub: "font-normal text-3xl md:text-5xl",
+    heroSub: "font-normal text-2xl md:text-3xl",
 
     title: "font-bold text-3xl md:text-4xl",
 
@@ -37,6 +37,7 @@ export const Text = ({
     muted: "text-gray-400",
     accent: "text-capsule_amber_200",
     white: "text-white",
+    green:"text-capsule_green"
   };
 
   const Component = animate ? motion[as] : as;
