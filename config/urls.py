@@ -34,7 +34,7 @@ urlpatterns = [
 
 urlpatterns += [
     #api_urls
-    path('api/', include("config.api_router")),
+    path('', include("config.api_router")),
     path('api-auth/', include('rest_framework.urls', namespace="rest_framework")),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
