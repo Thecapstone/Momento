@@ -27,6 +27,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('capsulers/', include('capsulers.urls')),
     path('memories/', include('memories.urls')),
+    path('payment/', include('payment.urls')),
     path('admin/', admin.site.urls),
 
 ]

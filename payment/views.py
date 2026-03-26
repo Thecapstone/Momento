@@ -20,7 +20,7 @@ def initiate_payment(request):
     return render(request, "payment.html", context)
 
 def payment_callback(request):
-    txn_ref = request.GET.get("txt_ref")
+    txn_ref = request.GET.get("txn_ref")
     amount = request.GET.get('amount')
 
     verification_url = f"https:qa.interswitchng.com/collections/api/v1/gettransaction.json?merchantcode={settings.INTERSWITCH_MERCHANT_CODE}&transactionreference={txn_ref}&amount={amount}"

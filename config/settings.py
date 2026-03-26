@@ -37,29 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'capsulers',
-    'memories',
     'widget_tweaks',
     'rest_framework',
     'djoser',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'allauth',
     'allauth.account',
-    
+    'capsulers',
+    'memories',
+    'payment',
 ]
 
 
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uuid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uuid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {
-        'user_create': 'djoser.serializers.UserCreateSerializer',
-    }
-}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,8 +151,36 @@ STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # OK
+    ],
 }
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+DJOSER = {
+    'PERMISSIONS': {
+        'user_create': ['rest_framework.permissions.AllowAny'],
+    },
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uuid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uuid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
+    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+    'SERIALIZERS': {
+        'user_create': 'djoser.serializers.UserCreateSerializer',
+    },
+}
+
 SPECTACULAR_SETTINGS = {
     'TITLE' : 'Wait-For-It API',
     'DESCRIPTION': 'A savings app for memories, building a new tech product? save memories of the creation process and share with waitlisters, or consumers to keep the hype up.',
@@ -173,3 +193,10 @@ SPECTACULAR_SETTINGS = {
 
 INTERSWITCH_MERCHANT_CODE = 'MX276091'
 INTERSWITCH_PAY_ITEM_ID = 'Default_Payable_MX276091'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'thecapstonemogbolu@gmail.com'
+EMAIL_HOST_PASSWORD = 'vvsqjtzeueiuqeyp'
