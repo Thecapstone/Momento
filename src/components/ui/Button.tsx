@@ -45,6 +45,8 @@ export const Button = ({
         flex items-center justify-center gap-2
         px-8 py-3
         bg-[#3C5D52] text-[#F2E1C3]
+        font-bold tracking-widest
+        uppercase
         shadow-lg
         transition-colors
         ${widthStyles[width]}
