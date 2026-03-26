@@ -1,5 +1,5 @@
-contributors ->
-1. Thecapstone Mogbolu https://github.com/Thecapstone/
+# Contributors 
+1. [Thecapstone Mogbolu](https://github.com/Thecapstone/)
 Role: Software Developer.
-Contributions: Developed backend APIs and handled frontend integration.
+-->Contributions: Developed backend APIs and handled frontend integration.
 
