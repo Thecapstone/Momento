@@ -5,14 +5,20 @@ import {
   PlusCircleIcon,
   UserCircleIcon,
   ArrowLeftEndOnRectangleIcon,
+  HomeIcon,
 } from "@heroicons/react/24/outline";
 import SideBar from "@/components/home/SideBar";
 
 const menuItems = [
+{
+    label: "Home",
+    icon: <HomeIcon className="w-5 h-5" />,
+    href: "/home",
+  },
   {
     label: "Create Capsule",
     icon: <PlusCircleIcon className="w-5 h-5" />,
-    href: "/create",
+    href: "/home/create",
   },
   {
     label: "Profile & Stats",
