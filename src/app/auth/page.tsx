@@ -1,10 +1,13 @@
+"use client";
 import { OpaquCard } from "@/components/auth/OpaquCard";
 import { Button } from "@/components/ui/Button";
 import { InputField } from "@/components/ui/InputField";
 import { Text } from "@/components/ui/Text";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
+  const router = useRouter();
   return (
     <OpaquCard>
       <div className="flex flex-col justify-center items-center gap-5 p-10">
@@ -24,6 +27,9 @@ const page = () => {
           text="Sign in"
           rounded="md"
           width="full"
+          onClick={() => {
+            router.replace("/home");
+          }}
         />
 
         {/* SIGN IN WITH EMAIL SECTION */}
@@ -48,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

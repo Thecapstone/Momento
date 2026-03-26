@@ -3,6 +3,7 @@ import CarouselOne from "@/components/onboarding/CarouselOne";
 import { CarouselThree } from "@/components/onboarding/CarouselThree";
 import { CarouselTwo } from "@/components/onboarding/CarouselTwo";
 import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const slides = [
@@ -13,8 +14,13 @@ const slides = [
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   const nextSlide = () => {
+    if (currentSlide === slides.length - 1) {
+      router.replace("/auth");
+      return;
+    }
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
