@@ -36,7 +36,7 @@ const HomeLayout = ({ children }: { children: ReactNode }) => {
 
       <main
         className={`flex-1 transition-all duration-300 ${
-          isOpen ? "pl-64" : "pl-20"
+          isOpen ? "pl-64" : "pl-0 md:pl-20"
         }`}
       >
         <div className="w-full min-h-screen">{children}</div>

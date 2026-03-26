@@ -32,12 +32,12 @@ const SideBar = ({
 
   return (
     <aside
-      className={`fixed left-0 top-0 h-screen z-50 bg-capsule_amber border-r border-capsule_amber_200 transition-all duration-300 ease-in-out ${
-        isOpen ? "w-64" : "w-20"
-      } flex flex-col`}
+      className={`fixed left-0 top-0 min-h-screen z-50 bg-capsule_amber border-r border-capsule_amber_200 transition-all duration-300 ease-in-out ${
+        isOpen ? "w-64" : "w-0 md:w-20"
+      } flex flex-col`} 
     >
       {/* Toggle Button Card - Floating slightly off the sidebar edge */}
-      <div className="absolute -right-5 top-8">
+      <div className="absolute -right-8 md:-right-5 top-8">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center justify-center w-10 h-10 bg-capsule_green border border-capsule_amber_200 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all group"
