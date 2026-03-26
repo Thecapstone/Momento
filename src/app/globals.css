@@ -17,9 +17,9 @@
   --color-foreground: var(--foreground);
   --color-capsule_orange: var(--capsule_orange);
   --color-capsule_green: var(--capsule_green);
-  --color-capsule_amber: var(--color-capsule_amber);
-  --color-capsule_amber_100: var(--color-capsule_amber_100);
-  --color-capsule_amber_200: var(--color-capsule_amber_200);
+  --color-capsule_amber: var(--capsule_amber);
+  --color-capsule_amber_100: var(--capsule_amber_100);
+  --color-capsule_amber_200: var(--capsule_amber_200);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
