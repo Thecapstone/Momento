@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { CarouseAnimationStyles } from "@/app/lib/onboardingUtils";
 
+const { animate, initial, transition } = CarouseAnimationStyles;
 const CarouselOne = () => (
   <div className="flex flex-col gap-5 items-center">
     <Image
@@ -13,17 +15,19 @@ const CarouselOne = () => (
 
     {/* text */}
     <div className="flex flex-col md:flex-row gap-3">
-      <motion.p className="text-capsule_orange font-extrabold text-4xl md:text-6xl"
-      initial={{x:"-100vw"}}
-      animate={{x:0}}
-      transition={{type:"tween"}}
+      <motion.p
+        className="text-capsule_orange font-extrabold text-4xl md:text-6xl"
+        initial={initial}
+        animate={animate}
+        transition={transition}
       >
         Builder&lsquo;s
       </motion.p>
-      <motion.p className="font-normal text-black text-3xl md:text-5xl"
-      initial={{x:"100vw"}}
-      animate={{x:0}}
-      transition={{type:"tween"}}
+      <motion.p
+        className="font-normal text-black text-3xl md:text-5xl"
+        initial={{ x: "100vw" }}
+        animate={animate}
+        transition={transition}
       >
         Time <br className="hidden md:block" />
         Capsule
