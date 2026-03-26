@@ -2,6 +2,7 @@
 import CarouselOne from "@/components/onboarding/CarouselOne";
 import { CarouselThree } from "@/components/onboarding/CarouselThree";
 import { CarouselTwo } from "@/components/onboarding/CarouselTwo";
+import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 
 const slides = [
@@ -36,12 +37,12 @@ const Carousel = () => {
 
       {/* Bottom Controls Area */}
       <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-6">
-        <button
+        <Button
           onClick={nextSlide}
-          className="px-8 py-3 bg-[#3C5D52] text-[#F2E1C3] rounded-full shadow-lg hover:bg-[#3C5D52]/20 transition-colors"
-        >
-          {slides[currentSlide].buttonText}
-        </button>
+          rounded="full"
+          width="fit"
+          text={slides[currentSlide].buttonText}
+        />
 
         {/* Indicators (Dots) */}
         <div className="flex items-center gap-2">
