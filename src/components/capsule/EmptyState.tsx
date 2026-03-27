@@ -1,4 +1,7 @@
+import { useRouter } from "next/navigation";
+
 export const EmptyState = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center h-[60vh] text-center">
       <h2 className="text-2xl font-semibold mb-2">No Capsules Yet</h2>
@@ -8,7 +11,12 @@ export const EmptyState = () => {
         ideas, progress, and reflections.
       </p>
 
-      <button className="px-6 py-3 bg-white text-black rounded-xl">
+      <button
+        className="px-6 py-3 bg-white text-black rounded-xl"
+        onClick={() => {
+          router.push("/home/create");
+        }}
+      >
         Create Capsule
       </button>
     </div>
