@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Brand Colors */
+  --capsule_orange: #824609;
+
+  --capsule_amber: #f8eddb;
+  --capsule_amber_100: #f9e6c8;
+  --capsule_amber_200: #824609;
+
+  --capsule_green: #3b5c51;
+  
+  /* Font Variables - Using standard system fallbacks if custom fonts aren't loaded yet */
+  --font-serif: "Times New Roman", Times, serif; 
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-capsule_orange: var(--capsule_orange);
+  --color-capsule_green: var(--capsule_green);
+  --color-capsule_amber: var(--capsule_amber);
+  --color-capsule_amber_100: var(--capsule_amber_100);
+  --color-capsule_amber_200: var(--capsule_amber_200);
+  
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    /* You might want to lighten the amber_200 for dark mode readability */
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+.text-label-capsule {
+    @apply text-[10px] font-bold tracking-[0.2em] uppercase;
+    font-family: var(--font-sans);
+    color: rgba(23, 23, 23, 0.7);
+  }
+}
