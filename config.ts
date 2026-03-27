@@ -1,0 +1,1 @@
+export const config = {api_base_url: "https://wait-for-it-e8rs.onrender.com/api/memories"}

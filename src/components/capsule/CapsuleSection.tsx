@@ -3,39 +3,37 @@
 import { CapsuleCard } from "./CapsuleCardTwo";
 import { EmptyState } from "./EmptyState";
 import { LoadingState } from "./Loading";
+import { useCapsules } from "@/lib/api/hooks/useCapsules";
 
-type Capsule = {
+type CapsuleStatus = "draft" | "active" | "archived";
+
+type CapsuleCardProps = {
   id: string;
   title: string;
-  status: "draft" | "active" | "archived";
+  description?: string;
+  status: CapsuleStatus;
   entryCount?: number;
   coverImage?: string;
 };
 
 export default function CapsulesPage() {
-  const capsules: Capsule[] = [
-    {
-      id: "1",
-      title: "Workspace Evolution",
-      status: "active",
-      entryCount: 24,
-      coverImage: "/images/demo_project.png",
-    },
-    {
-      id: "2",
-      title: "Sonic Textures",
-      status: "draft",
-      coverImage: "/images/demo_project.png",
-    },
-  ];
+  const { data, isLoading } = useCapsules();
 
-  if (!capsules) return <LoadingState />;
+  if (isLoading) return <LoadingState />;
 
-  if (capsules.length === 0) return <EmptyState />;
+  const capsules = data?.map<CapsuleCardProps>((capsule) => ({
+    id: capsule.id.toString(),
+    title: capsule.title,
+    description: capsule.description ?? undefined,
+    status: capsule.private ? "draft" : "active",
+    entryCount: capsule.members,
+    coverImage: capsule.url ?? "/images/demo_project.png",
+  }));
+
+  if (!capsules || capsules.length === 0) return <EmptyState />;
 
   return (
     <div className="p-6 pb-20 bg-capsule_amber">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-semibold">Your Capsules</h1>
         <p className="text-gray-400">
@@ -43,7 +41,6 @@ export default function CapsulesPage() {
         </p>
       </div>
 
-      {/* Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {capsules.map((capsule) => (
           <CapsuleCard key={capsule.id} capsule={capsule} />
