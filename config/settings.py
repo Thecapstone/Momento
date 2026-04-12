@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "bananA123")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.0']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -39,17 +40,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+
+    #drf apps
     'rest_framework',
-    'djoser',
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+
+    #schema and documentation
+    'django_extensions',
     'drf_spectacular',
     'drf_spectacular_sidecar',
-    'allauth',
-    'allauth.account',
+
+    #local apps
     'capsulers',
     'memories',
     'payment',
+    'health',
 ]
 
 
@@ -61,7 +68,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "allauth.account.middleware.AccountMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -87,17 +93,14 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = 'capsulers.User'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+#ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 #ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+#ACCOUNT_LOGIN_METHODS = {'email'}
+#ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -154,8 +157,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
+        'capsulers.authentication.CookieJWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',  # OK
@@ -163,29 +167,16 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
-}
-
-DJOSER = {
-    'PERMISSIONS': {
-        'user_create': ['rest_framework.permissions.AllowAny'],
-    },
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uuid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uuid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'LOGIN_FIELD': 'email',
-    'USER_CREATE_PASSWORD_RETYPE': True,
-    'LOGOUT_ON_PASSWORD_CHANGE': True,
-    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
-    'SERIALIZERS': {
-        'user_create': 'djoser.serializers.UserCreateSerializer',
-    },
+    "AUTH_HEADER_TYPES": ('Bearer',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
 }
 
 SPECTACULAR_SETTINGS = {
     'TITLE' : 'Wait-For-It API',
-    'DESCRIPTION': 'A savings app for memories, building a new tech product? save memories of the creation process and share with waitlisters, or consumers to keep the hype up.',
+    'DESCRIPTION': 'API documentation for Wait-For-It',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'SWAGGER_UI_DIST': 'SIDECAR',

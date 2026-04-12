@@ -1,18 +1,15 @@
 from rest_framework import routers
 from memories.views import CapsuleViewSet
+from capsulers.views import UserViewSet, AuthViewSet
+from health.views import HealthCheckView
 from django.urls import path
 
-
+app_name = "api"
 
 router = routers.SimpleRouter()
-router.register('memories', CapsuleViewSet)
+router.register(r'memories', CapsuleViewSet, basename='memories')
+router.register(r'users', UserViewSet, basename='users')
+router.register(r'auth', AuthViewSet, basename='auth')
+router.register(r'health', HealthCheckView, basename='health')
 
-
-
-app_name = "api"
 urlpatterns = router.urls
-
-
-#33ccff
-#7abecc
-#74cfbf

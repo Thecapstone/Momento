@@ -10,10 +10,11 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     username = None
-    #username = models.CharField(_("Username"), unique=True)
     first_name = None
     last_name = None
+
     email = models.EmailField(_("email address"), unique=True)
+    
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(_("last login"), blank=True, null=True)
     is_premium = models.BooleanField(default=False)

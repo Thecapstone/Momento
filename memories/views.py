@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 from django.shortcuts import render
 from memories.forms import CapsuleContentForm
 from memories.serializers import CapsuleCreationSerializer, CapsuleViewSerializer
-from memories.models import Capsule
+from memories.models import Capsule as capsule_db
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
@@ -21,7 +21,7 @@ def CreateCapsule(request):
     return render(request, 'memories/index.html', context)
 
 class CapsuleViewSet(ModelViewSet):
-    queryset = Capsule.objects.all()
+    queryset = capsule_db.objects.all()
     serializer_class = CapsuleCreationSerializer
 
     @extend_schema(
@@ -42,8 +42,9 @@ class CapsuleViewSet(ModelViewSet):
             responses={201: CapsuleViewSerializer})
     def retrieve(self, request, pk):
         try:
-            capsule = Capsule.objects.get(id=pk)
-        except Capsule.DoesNotExist:
+            capsule = capsule_db.objects.get(id=pk)
+        except capsule_db.DoesNotExist:
+            
             return Response({'Capsule': 'Capsule does not exist'}, status=status.HTTP_404_NOT_FOUND)
         serializer = CapsuleViewSerializer(capsule)
         
@@ -60,8 +61,8 @@ class CapsuleViewSet(ModelViewSet):
             responses={201: CapsuleViewSerializer})
     def join(self, request, pk):
         try:
-            capsule = Capsule.objects.get(id=pk)
-        except Capsule.DoesNotExist:
+            capsule = capsule_db.objects.get(id=pk)
+        except capsule_db.DoesNotExist:
             return Response({'Capsule': 'Capsule does not exist'}, status=status.HTTP_404_NOT_FOUND)
         serializer = CapsuleViewSerializer(capsule)
         if TYPE_CHECKING:

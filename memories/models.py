@@ -14,7 +14,7 @@ class Capsule(models.Model):
     audio = models.FileField(upload_to='audio/', null=True, blank=True)
     audio_alt_text = models.CharField(max_length=220, null=True, blank=True)
     description = models.CharField(null=True, blank=True)
-    members = models.ManyToManyField('capsulers.User', related_name='joined_capsules', null=True, blank=True)
+    members = models.ManyToManyField('capsulers.User', related_name='joined_capsules', blank=True)
     private = models.BooleanField(default=True)
    
 
@@ -26,8 +26,8 @@ class Capsule(models.Model):
             return True
         return False
 
-    def __str__(self):
-        return self.title  
+    def __repr__(self):
+        return f"{self.title} is a private: {self.is_private}, capsule"  
 
 
 
